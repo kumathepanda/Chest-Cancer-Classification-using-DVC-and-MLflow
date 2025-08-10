@@ -1,7 +1,9 @@
 from Chest_cancer_classification.constants import *
-from Chest_cancer_classification.utils.common import read_yaml,create_directories
-from Chest_cancer_classification.entity.config_entity import (DataIngestionConfig,PrepareBaseModelConfig,TrainingConfig)
+from Chest_cancer_classification.utils.common import read_yaml,create_directories,save_json
+from Chest_cancer_classification.entity.config_entity import (DataIngestionConfig,PrepareBaseModelConfig,TrainingConfig,EvaluationConfig)
 import os
+from dotenv import load_dotenv
+load_dotenv()
 class ConfigurationManager:
     def __init__(self,config_filepath=CONFIG_FILE_PATH,params_filepath=PARAMS_FILE_PATH):
         self.config = read_yaml(config_filepath)
@@ -59,3 +61,13 @@ class ConfigurationManager:
 
         return training_config
         
+    def get_evaluation_config(self) -> EvaluationConfig:
+        eval_config = EvaluationConfig(
+            path_of_model="artifacts/training/model.h5",
+            training_data="artifacts/data_ingestion/Chest_ct_Scan_data/data",
+            mlflow_uri=os.environ["MLFLOW_TRACKING_URI"],
+            all_params=self.params,
+            params_image_size=self.params.IMAGE_SIZE,
+            params_batch_size=self.params.BATCH_SIZE
+        )
+        return eval_config
