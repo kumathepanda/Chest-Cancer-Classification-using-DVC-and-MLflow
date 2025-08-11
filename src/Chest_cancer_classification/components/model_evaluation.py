@@ -12,12 +12,10 @@ class Evaluation:
     def __init__(self, config: EvaluationConfig):
         self.config = config
 
-    
-    def _valid_generator(self):
+    def _test_generator(self):
 
         datagenerator_kwargs = dict(
-            rescale = 1./255,
-            validation_split=0.30
+            rescale = 1./255
         )
 
         dataflow_kwargs = dict(
@@ -26,41 +24,36 @@ class Evaluation:
             interpolation="bilinear"
         )
 
-        valid_datagenerator = tf.keras.preprocessing.image.ImageDataGenerator(
+        test_datagenerator = tf.keras.preprocessing.image.ImageDataGenerator(
             **datagenerator_kwargs
         )
-
-        self.valid_generator = valid_datagenerator.flow_from_directory(
-            directory=self.config.training_data,
-            subset="validation",
+        
+        
+        self.test_generator = test_datagenerator.flow_from_directory(
+            directory=self.config.test_dir,
             shuffle=False,
             **dataflow_kwargs
         )
-
 
     @staticmethod
     def load_model(path: Path) -> tf.keras.Model:
         return tf.keras.models.load_model(path)
     
-
     def evaluation(self):
         self.model = self.load_model(self.config.path_of_model)
-        self._valid_generator()
-
+        self._test_generator()
         
-        self.score = self.model.evaluate(self.valid_generator, verbose=1)
-
+        self.score = self.model.evaluate(self.test_generator, verbose=1)
         
-        y_true = self.valid_generator.classes
-        y_pred_probs = self.model.predict(self.valid_generator, verbose=1)
+        y_true = self.test_generator.classes
+        y_pred_probs = self.model.predict(self.test_generator, verbose=1)
         threshold = 0.48
         y_pred = (y_pred_probs[:,1]>=threshold).astype(int)
-
         
-        auc = roc_auc_score(y_true, y_pred_probs[:, 1]) if y_pred_probs.shape[1] == 2 else None
-        precision = precision_score(y_true, y_pred, average="binary")
-        recall = recall_score(y_true, y_pred, average="binary")
-        f1 = f1_score(y_true, y_pred, average="binary")
+        auc = roc_auc_score(y_true,y_pred_probs,multi_class="ovr",average="weighted")
+        precision = precision_score(y_true, y_pred, average="weighted",zero_division=1)
+        recall = recall_score(y_true, y_pred, average="weighted",zero_division=1)
+        f1 = f1_score(y_true, y_pred, average="weighted",zero_division=1)
 
         self.metrics = {
             "loss": self.score[0],
@@ -76,7 +69,6 @@ class Evaluation:
     def save_score(self):
         scores = self.metrics
         save_json(path=Path("scores.json"), data=scores)
-
     
     def log_into_mlflow(self):
         mlflow.set_registry_uri(self.config.mlflow_uri)
@@ -89,11 +81,6 @@ class Evaluation:
             )
             # Model registry does not work with file store
             if tracking_url_type_store != "file":
-
-                # Register the model
-                # There are other ways to use the Model Registry, which depends on the use case,
-                # please refer to the doc for more information:
-                # https://mlflow.org/docs/latest/model-registry.html#api-workflow
-                mlflow.keras.log_model(self.model, "model", registered_model_name="MobileNetV2")
+                mlflow.keras.log_model(self.model, "model", registered_model_name="DenseNet121")
             else:
                 mlflow.keras.log_model(self.model, "model")

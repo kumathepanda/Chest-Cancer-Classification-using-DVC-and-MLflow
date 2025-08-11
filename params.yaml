@@ -1,8 +1,13 @@
 AUGMENTATION: True
-IMAGE_SIZE: [224,224,3]
+IMAGE_SIZE: [224, 224, 3]
 WEIGHTS: imagenet
 BATCH_SIZE: 16
-CLASSES : 2
-LEARNING_RATE: 0.0001
+CLASSES: 4
+LEARNING_RATE: 0.001     # Learning rate for the initial warm-up phase
 INCLUDE_TOP: False
-EPOCHS: 10
+EPOCHS: 100              # Total epochs for the fine-tuning phase
+
+# --- New Parameters for Two-Stage Training ---
+WARMUP_EPOCHS: 20        # Number of epochs to train only the head
+UNFREEZE_LAYERS: 10      # Number of top layers to unfreeze for fine-tuning
+FINETUNE_LR: 0.00001     # Very low learning rate for the fine-tuning phase
