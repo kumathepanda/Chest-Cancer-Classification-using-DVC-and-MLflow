@@ -4,6 +4,7 @@ import tensorflow as tf
 from pathlib import Path
 from sklearn.utils.class_weight import compute_class_weight
 import numpy as np
+import shutil
 # UPDATED: Import both ReduceLROnPlateau and EarlyStopping
 from keras.callbacks import ReduceLROnPlateau, EarlyStopping
 
@@ -104,3 +105,6 @@ class Training:
             path=self.config.trained_model_path,
             model=self.model
         )
+        model_deployment_path = os.path.join("model", "model.h5")
+        shutil.copy(self.config.trained_model_path, model_deployment_path)
+        print(f"Model saved for deployment at: {model_deployment_path}")
