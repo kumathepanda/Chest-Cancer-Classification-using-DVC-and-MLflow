@@ -7,4 +7,5 @@ Flask
 Flask-Cors
 gunicorn
 joblib  # Add this line
+ensure
 -e .
