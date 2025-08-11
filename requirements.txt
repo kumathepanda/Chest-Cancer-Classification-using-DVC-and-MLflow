@@ -5,6 +5,6 @@ pyYAML
 python-box==6.0.2
 Flask
 Flask-Cors
-joblib
 gunicorn
+joblib  # Add this line
 -e .
