@@ -1,6 +1,6 @@
 tensorflow==2.12.0
 numpy
-PIL
+Pillow
 pyYAML
 python-box==6.0.2
 Flask
