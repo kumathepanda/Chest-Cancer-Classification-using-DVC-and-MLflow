@@ -4,11 +4,11 @@ This project implements a complete end-to-end MLOps pipeline for classifying fou
 
 The core of the project is a deep learning model based on the **DenseNet121** architecture, which has been fine-tuned to achieve high performance on this specific medical imaging task.
 
-## 🚀 Live Demo
+##  Live Demo
 
 *[https://chestcancerclassification-bxh6gefng0faandn.centralindia-01.azurewebsites.net/]*
 
-## ✨ Features
+##  Features
 
   * **AI-Powered Prediction**: Classifies CT scan images into four distinct categories.
   * **Interactive Web UI**: A clean, user-friendly interface built with Flask and HTML/CSS/JS.
@@ -38,7 +38,7 @@ This project follows a structured MLOps workflow, managed by DVC:
       * **Fine-Tuning Phase**: Unfreezes the top layers and fine-tunes the model with a low learning rate.
 4.  **Model Evaluation**: Evaluates the trained model on a test set and logs metrics using MLflow.
 
-## ⚙️ Local Setup and Installation
+##  Local Setup and Installation
 
 To run this project on your local machine, follow these steps:
 
@@ -81,7 +81,7 @@ export MLFLOW_TRACKING_USERNAME="<your-username>"
 export MLFLOW_TRACKING_PASSWORD="<your-password>"
 ```
 
-## 🚀 How to Run
+##  How to Run
 
 ### **1. Run the DVC Training Pipeline**
 
@@ -103,7 +103,7 @@ python app.py
 
 Then, open your web browser and navigate to `http://127.0.0.1:8080`.
 
-## 🚢 Deployment
+##  Deployment
 
 This application is designed for deployment using Docker and is hosted on Microsoft Azure.
 
@@ -117,7 +117,7 @@ This application is designed for deployment using Docker and is hosted on Micros
     ```
 3.  **Deploy on Azure App Service**: The application is deployed using an Azure App Service configured to run a Docker container. A GitHub Actions workflow is set up for CI/CD, which automatically builds and deploys the application whenever new changes are pushed to the `main` branch.
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 ├── .github/workflows/       # CI/CD pipeline with GitHub Actions
