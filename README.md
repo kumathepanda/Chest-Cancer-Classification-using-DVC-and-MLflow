@@ -1,9 +1,3 @@
-Of course\! A high-quality README is essential for any project. It acts as the front door, explaining what the project does, why it's useful, and how to get it running.
-
-Based on the entire workflow we've built together, here is a comprehensive, professional `README.md` file for your project. I've structured it to be clear, easy to follow, and to highlight the advanced MLOps and deployment practices you've implemented.
-
------
-
 # End-to-End Lung Cancer Classification using MLOps
 
 This project implements a complete end-to-end MLOps pipeline for classifying four types of lung cancer (Adenocarcinoma, Large Cell Carcinoma, Normal, and Squamous Cell Carcinoma) from CT scan images. The system is built following a reproducible workflow using **DVC** for pipelining, **MLflow** for experiment tracking, and is deployed as a web application using **Docker** and **Microsoft Azure**.
