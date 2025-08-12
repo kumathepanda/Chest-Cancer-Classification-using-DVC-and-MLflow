@@ -34,6 +34,7 @@ class TrainingConfig:
     params_warmup_epochs:int
     params_unfreeze_layers: int 
     params_finetune_lr: float
+    params_random_state: int
 
 @dataclass(frozen=True)
 class EvaluationConfig:

@@ -11,3 +11,4 @@ EPOCHS: 100              # Total epochs for the fine-tuning phase
 WARMUP_EPOCHS: 20        # Number of epochs to train only the head
 UNFREEZE_LAYERS: 10      # Number of top layers to unfreeze for fine-tuning
 FINETUNE_LR: 0.00001     # Very low learning rate for the fine-tuning phase
+RANDOM_STATE: 42

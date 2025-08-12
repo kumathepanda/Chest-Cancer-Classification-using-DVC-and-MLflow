@@ -61,7 +61,8 @@ class ConfigurationManager:
             params_image_size=params.IMAGE_SIZE,
             params_unfreeze_layers=params.UNFREEZE_LAYERS,
             params_warmup_epochs=params.WARMUP_EPOCHS,
-            params_finetune_lr=params.FINETUNE_LR
+            params_finetune_lr=params.FINETUNE_LR,
+            params_random_state = params.RANDOM_STATE
         )
 
         return training_config

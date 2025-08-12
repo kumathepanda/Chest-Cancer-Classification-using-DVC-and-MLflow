@@ -1,7 +1,10 @@
 from Chest_cancer_classification.config.configuration import ConfigurationManager
 from Chest_cancer_classification.components.model_trainer import Training
 from Chest_cancer_classification import logger
-
+import tensorflow as tf
+import numpy as np
+import random
+import os 
 STAGE_NAME = "Model Training"
 
 
@@ -12,6 +15,13 @@ class ModelTrainingPipeline:
     def main(self):
         config = ConfigurationManager()
         model_training_config = config.get_training_config()
+        seed = model_training_config.params_random_state
+        os.environ['PYTHONHASHSEED'] = str(seed)
+        random.seed(seed)
+        np.random.seed(seed)
+        tf.random.set_seed(seed)
+        tf.config.threading.set_inter_op_parallelism_threads(1)
+        tf.config.threading.set_intra_op_parallelism_threads(1)
         model_trainer = Training(config=model_training_config)
         model_trainer.get_base_model()
         model_trainer.train_valid_generator()
