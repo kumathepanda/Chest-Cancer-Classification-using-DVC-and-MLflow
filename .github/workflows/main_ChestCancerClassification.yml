@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: chestcancerclassification.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_38a5be6c4a1346b9a40b8e78a88c99eb }}/flaskapp:${{ github.sha }}
+        tags: chestcancerclassification.azurecr.io/flaskapp:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
