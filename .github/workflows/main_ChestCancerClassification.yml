@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://chestcancerclassification.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_e6ef1afc0fd44f8aa0f2c85a043748d6 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_c503eeb143554f0ebd73c4ce150195e1 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_38a5be6c4a1346b9a40b8e78a88c99eb }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_d694b3b6a8ad4c2d855c23ea710c2fc1 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: chestcancerclassification.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e6ef1afc0fd44f8aa0f2c85a043748d6 }}/flaskapp:${{ github.sha }}
+        tags: chestcancerclassification.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_38a5be6c4a1346b9a40b8e78a88c99eb }}/flaskapp:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'ChestCancerClassification'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_d0685898cc50439f94e799f98bd55b33 }}
-        images: 'chestcancerclassification.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e6ef1afc0fd44f8aa0f2c85a043748d6 }}/flaskapp:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_d96329f2c2b045398793256679b69639 }}
+        images: 'chestcancerclassification.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_38a5be6c4a1346b9a40b8e78a88c99eb }}/flaskapp:${{ github.sha }}'
