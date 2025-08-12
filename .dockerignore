@@ -1,0 +1,23 @@
+# Ignore the virtual environment
+venv/
+__pycache__/
+
+# Ignore Git and DVC files
+.git
+.gitignore
+.dvc
+.dvcignore
+dvc.lock
+
+# Ignore local development and data files
+.env
+artifacts/
+research/
+*.ipynb
+scores.json
+
+# Ignore other configuration and temporary files
+*.pyc
+*.pyo
+*.pyd
+.Python
