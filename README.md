@@ -18,14 +18,14 @@ The core of the project is a deep learning model based on the **DenseNet121** ar
   * **Experiment Tracking**: All experiments are tracked with MLflow, logging parameters, metrics, and model artifacts.
   * **CI/CD Deployment**: Automated deployment pipeline using GitHub Actions to build and deploy the application to Azure.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
   * **Backend**: Python, Flask
   * **Deep Learning**: TensorFlow, Keras
   * **MLOps**: DVC, MLflow
   * **Deployment**: Docker, Gunicorn, Microsoft Azure (App Service & Container Registry)
   * **CI/CD**: GitHub Actions
-  * **Frontend**: HTML, Tailwind CSS, JavaScript
+  * **Frontend**: HTML, CSS, JavaScript
 
 ## Workflow
 
