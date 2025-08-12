@@ -8,6 +8,8 @@ WORKDIR /app
 COPY requirements.txt .
 COPY setup.py .
 COPY src ./src
+# ADD THIS LINE to make the README available for setup.py
+COPY README.md .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
