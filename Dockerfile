@@ -6,9 +6,8 @@ WORKDIR /app
 
 # Copy dependency-related files first
 COPY requirements.txt .
-COPY setup.py .          
-COPY pyproject.toml .    
-COPY src ./src           
+COPY setup.py .
+COPY src ./src
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
