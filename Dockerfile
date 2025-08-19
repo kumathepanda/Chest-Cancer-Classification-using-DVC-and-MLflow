@@ -4,17 +4,20 @@ FROM python:3.11-slim-buster
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy dependencies first (for better caching)
+# Copy dependency-related files first
 COPY requirements.txt .
+COPY setup.py .
+COPY src ./src
+# ADD THIS LINE to make the README available for setup.py
+COPY README.md .
 
-# Install dependencies
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy only what is needed at runtime
-COPY src ./src
-COPY model ./model
-COPY templates ./templates
-COPY app.py .
+# Now copy the rest of the application code
+COPY ./model ./model
+COPY ./templates ./templates
+COPY ./app.py .
 
 # Expose the port the app runs on
 EXPOSE 8080
